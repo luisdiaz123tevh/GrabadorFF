@@ -1,0 +1,254 @@
+name: Crear APK
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - uses: android-actions/setup-android@v3
+
+      - uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.4'
+
+      - name: Armar Proyecto y Compilar
+        run: |
+          mkdir -p app/src/main/java/com/gamer/recorder
+          echo "cGx1Z2luTWFuYWdlbWVudCB7CiAgcmVwb3NpdG9yaWVzIHsKICAgIGdvb2dsZSgpCiAgICBtYXZlbkNlbnRyYWwoKQogICAgZ3JhZGxlUGx1Z2luUG9ydGFsKCkKICB9Cn0KZGVwZW5kZW5jeVJlc29sdXRpb25NYW5hZ2VtZW50IHsKICByZXBvc2l0b3JpZXNNb2RlLnNldChSZXBvc2l0b3JpZXNNb2RlLkZBSUxfT05fUFJPSkVDVF9SRVBPUykKICByZXBvc2l0b3JpZXMgewogICAgZ29vZ2xlKCkKICAgIG1hdmVuQ2VudHJhbCgpCiAgfQp9CnJvb3RQcm9qZWN0Lm5hbWUgPSAiR2FtZXJSZWNvcmRlciIKaW5jbHVkZSAiOmFwcCIK" | base64 -d > settings.gradle
+          echo "cGx1Z2lucyB7CiAgaWQgImNvbS5hbmRyb2lkLmFwcGxpY2F0aW9uIiB2ZXJzaW9uICI4LjIuMCIgYXBwbHkgZmFsc2UKICBpZCAib3JnLmpldGJyYWlucy5rb3RsaW4uYW5kcm9pZCIgdmVyc2lvbiAiMS45LjIwIiBhcHBseSBmYWxzZQp9Cg==" | base64 -d > build.gradle
+          echo "b3JnLmdyYWRsZS5qdm1hcmdzPS1YbXgyMDQ4bSAtRGZpbGUuZW5jb2Rpbmc9VVRGLTgKYW5kcm9pZC51c2VBbmRyb2lkWD10cnVlCmtvdGxpbi5jb2RlLnN0eWxlPW9mZmljaWFsCg==" | base64 -d > gradle.properties
+          echo "cGx1Z2lucyB7CiAgaWQgImNvbS5hbmRyb2lkLmFwcGxpY2F0aW9uIgogIGlkICJvcmcuamV0YnJhaW5zLmtvdGxpbi5hbmRyb2lkIgp9CmFuZHJvaWQgewogIG5hbWVzcGFjZSAiY29tLmdhbWVyLnJlY29yZGVyIgogIGNvbXBpbGVTZGsgMzQKICBkZWZhdWx0Q29uZmlnIHsKICAgIGFwcGxpY2F0aW9uSWQgImNvbS5nYW1lci5yZWNvcmRlciIKICAgIG1pblNkayAyOQogICAgdGFyZ2V0U2RrIDM0CiAgICB2ZXJzaW9uQ29kZSAxCiAgICB2ZXJzaW9uTmFtZSAiMS4wIgogIH0KICBjb21waWxlT3B0aW9ucyB7CiAgICBzb3VyY2VDb21wYXRpYmlsaXR5IEphdmFWZXJzaW9uLlZFUlNJT05fMTcKICAgIHRhcmdldENvbXBhdGliaWxpdHkgSmF2YVZlcnNpb24uVkVSU0lPTl8xNwogIH0KICBrb3RsaW5PcHRpb25zIHsKICAgIGp2bVRhcmdldCA9ICIxNyIKICB9Cn0KZGVwZW5kZW5jaWVzIHsKICBpbXBsZW1lbnRhdGlvbiAiYW5kcm9pZHguY29yZTpjb3JlLWt0eDoxLjEyLjAiCiAgaW1wbGVtZW50YXRpb24gImFuZHJvaWR4LmFwcGNvbXBhdDphcHBjb21wYXQ6MS42LjEiCn0K" | base64 -d > app/build.gradle
+          echo "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPG1hbmlmZXN0IHhtbG5zOmFuZHJvaWQ9Imh0dHA6Ly9zY2hlbWFzLmFuZHJvaWQuY29tL2Fwai9yZXMvYW5kcm9pZCI+CiAgPHVzZXMtcGVybWlzc2lvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQucGVybWlzc2lvbi5JTlRFUk5FVCIgLz4KICA8dXNlcy1wZXJtaXNzaW9uIGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5wZXJtaXNzaW9uLlJFQ09SRF9BVURJTyIgLz4KICA8dXNlcy1wZXJtaXNzaW9uIGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5wZXJtaXNzaW9uLk1PRElGWV9BVURJT19TRVRUSU5HUyIgLz4KICA8dXNlcy1wZXJtaXNzaW9uIGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5wZXJtaXNzaW9uLkZPUkVHUk9VTkRfU0VSVklDRSIgLz4KICA8dXNlcy1wZXJtaXNzaW9uIGFuZHJvaWQ6bmFtZT0iYW5kcm9pZC5wZXJtaXNzaW9uLkZPUkVHUk9VTkRfU0VSVklDRV9NRURJQV9QUk9KRUNUSU9OIiAvPgogIDx1c2VzLXBlcm1pc3Npb24gYW5kcm9pZDpuYW1lPSJhbmRyb2lkLnBlcm1pc3Npb24uRk9SRUdST1VORF9TRVJWSUNFX01JQ1JPUEhPTkUiIC8+CiAgPHVzZXMtcGVybWlzc2lvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQucGVybWlzc2lvbi5QT1NUX05PVElGSUNBVElPTlMiIC8+CiAgPGFwcGxpY2F0aW9uIGFuZHJvaWQ6YWxsb3dCYWNrdXA9InRydWUiIGFuZHJvaWQ6bGFiZWw9IkdhbWVyUmVjICsgRGlzY29yZCIgYW5kcm9pZDppY29uPSJAYW5kcm9pZDpkcmF3YWJsZS9wcmVzZW5jZV92aWRlb19vbmxpbmUiIGFuZHJvaWQ6dGhlbWU9IkBzdHlsZS9UaGVtZS5BcHBDb21wYXQuTm9BY3Rpb25CYXIiPgogICAgPGFjdGl2aXR5IGFuZHJvaWQ6bmFtZT0iLk1haW5BY3Rpdml0eSIgYW5kcm9pZDpleHBvcnRlZD0idHJ1ZSIgYW5kcm9pZDpjb25maWdDaGFuZ2VzPSJvcmllbnRhdGlvbHxzY3JlZW5TaXplfGtleWJvYXJkSGlkZGVuIj4KICAgICAgPGludGVudC1maWx0ZXI+CiAgICAgICAgPGFjdGlvbiBhbmRyb2lkOm5hbWU9ImFuZHJvaWQubWVpbnQuaW50ZW50LmFjdGlvbi5NQUlOIiAvPgogICAgICAgIDxjYXRlZ29yeSBhbmRyb2lkOm5hbWU9ImFuZHJvaWQuaW50ZW50LmNhdGVnb3J5LkxBVU5DSEVSIiAvPgogICAgICA8L2ludGVudC1maWx0ZXI+CiAgICA8L2FjdGl2aXR5PgogICAgPHNlcnZpY2UgYW5kcm9pZDpuYW1lPSIuUmVjb3JkZXJTZXJ2aWNlIiBhbmRyb2lkOmVuYWJsZWQ9InRydWUiIGFuZHJvaWQ6ZXhwb3J0ZWQ9ImZhbHNlIiBhbmRyb2lkOmZvcmVncm91bmRTZXJ2aWNlVHlwZT0ibWVkaWFQcm9qZWN0aW9ufG1pY3JvcGhvbmUiIC8+CiAgPC9hcHBsaWNhdGlvbj4KPC9tYW5pZmVzdD4K" | base64 -d | sed 's/apj\/res/apk\/res/g; s/meint\.intent/intent/g' > app/src/main/AndroidManifest.xml
+          echo "cGFja2FnZSBjb20uZ2FtZXIucmVjb3JkZXIKaW1wb3J0IGFuZHJvaWQuTWFuaWZlc3QKaW1wb3J0IGFuZHJvaWQuYXBwLkFjdGl2aXR5CmltcG9ydCBhbmRyb2lkLmNvbnRlbnQuQ29udGV4dAppbXBvcnQgYW5kcm9pZC5jb250ZW50LkludGVudAppbXBvcnQgYW5kcm9pZC5ncmFwaGljcy5Db2xvcgppbXBvcnQgYW5kcm9pZC5tZWRpYS5wcm9qZWN0aW9uLk1lZGlhUHJvamVjdGlvbk1hbmFnZXIKaW1wb3J0IGFuZHJvaWQub3MuQnVpbGQKaW1wb3J0IGFuZHJvaWQub3MuQnVuZGxlCmltcG9ydCBhbmRyb2lkLndlYmtpdC4qCmltcG9ydCBhbmRyb2lkLndpZGdldC5CdXR0b24KaW1wb3J0IGFuZHJvaWQud2lkZ2V0LkxpbmVhckxheW91dAppbXBvcnQgYW5kcm9pZC53aWRnZXQuVG9hc3QKaW1wb3J0IGFuZHJvaWR4LmFwcGNvbXBhdC5hcHAuQXBwQ29tcGF0QWN0aXZpdHkKaW1wb3J0IGFuZHJvaWR4LmNvcmUuYXBwLkFjdGl2aXR5Q29tcGF0CmNsYXNzIE1haW5BY3Rpdml0eSA6IEFwcENvbXBhdEFjdGl2aXR5KCkgewogICAgcHJpdmF0ZSBsYXRlaW5pdCB2YXIgcHJvamVjdGlvbk1hbmFnZXI6IE1lZGlhUHJvamVjdGlvbk1hbmFnZXIKICAgIHByaXZhdGUgdmFsIFJFUV9DT0RFID0gMTAwMQogICAgb3ZlcnJpZGUgZnVuIG9uQ3JlYXRlKHNhdmVkSW5zdGFuY2VTdGF0ZTogQnVuZGxlPykgewogICAgICAgIHN1cGVyLm9uQ3JlYXRlKHNhdmVkSW5zdGFuY2VTdGF0ZSkKICAgICAgICBBY3Rpdml0eUNvbXBhdC5yZXF1ZXN0UGVybWlzc2lvbnModGhpcywgYXJyYXlPZihNYW5pZmVzdC5wZXJtaXNzaW9uLlJFQ09SRF9BVURJTywgTWFuaWZlc3QucGVybWlzc2lvbi5NT0RJRllfQVVESU9fU0VUVElOR1MsIE1hbmlmZXN0LnBlcm1pc3Npb24uUE9TVF9OT1RJRklDQVRJT05TKSwgMTAxKQogICAgICAgIHByb2plY3Rpb25NYW5hZ2VyID0gZ2V0U3lzdGVtU2VydmljZShDb250ZXh0Lk1FRElBX1BST0pFQ1RJT05fU0VSVklDRSkgaXMgTWVkaWFQcm9qZWN0aW9uTWFuYWdlcgogICAgICAgIHZhbCBsYXlvdXQgPSBMaW5lYXJMYXlvdXQodGhpcykuYXBwbHkg｛IG9yaWVudGF0aW9uID0gTGluZWFyTGF5b3V0LlZFUlRJQ0FMOyBzZXRCYWNrZ3JvdW5kQ29sb3IoQ29sb3IucGFyc2VDb2xvcihCIzFFMUYyMiIpKSB9CiAgICB9Cn0K" > /dev/null
+          cat << 'EOF_KT1' > app/src/main/java/com/gamer/recorder/MainActivity.kt
+          package com.gamer.recorder
+          import android.Manifest
+          import android.app.Activity
+          import android.content.Context
+          import android.content.Intent
+          import android.graphics.Color
+          import android.media.projection.MediaProjectionManager
+          import android.os.Build
+          import android.os.Bundle
+          import android.webkit.*
+          import android.widget.Button
+          import android.widget.LinearLayout
+          import android.widget.Toast
+          import androidx.appcompat.app.AppCompatActivity
+          import androidx.core.app.ActivityCompat
+
+          class MainActivity : AppCompatActivity() {
+              private lateinit var projectionManager: MediaProjectionManager
+              private val REQ_CODE = 1001
+
+              override fun onCreate(savedInstanceState: Bundle?) {
+                  super.onCreate(savedInstanceState)
+                  ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.MODIFY_AUDIO_SETTINGS, Manifest.permission.POST_NOTIFICATIONS), 101)
+                  projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+                  val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(Color.parseColor("#1E1F22")) }
+                  val topBar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+                  val btnStart = Button(this).apply {
+                      text = "GRABAR PARTIDA + VOZ"
+                      setBackgroundColor(Color.parseColor("#DA373C"))
+                      setTextColor(Color.WHITE)
+                      setOnClickListener { startActivityForResult(projectionManager.createScreenCaptureIntent(), REQ_CODE) }
+                  }
+                  val btnStop = Button(this).apply {
+                      text = "DETENER Y GUARDAR"
+                      setBackgroundColor(Color.parseColor("#2B2D31"))
+                      setTextColor(Color.WHITE)
+                      setOnClickListener {
+                          startService(Intent(this@MainActivity, RecorderService::class.java).apply { action = "STOP_REC" })
+                          Toast.makeText(this@MainActivity, "Guardado en Peliculas (Galeria)", Toast.LENGTH_LONG).show()
+                      }
+                  }
+                  topBar.addView(btnStart, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+                  topBar.addView(btnStop, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+                  val discordWeb = WebView(this).apply {
+                      settings.javaScriptEnabled = true
+                      settings.domStorageEnabled = true
+                      settings.mediaPlaybackRequiresUserGesture = false
+                      settings.userAgentString = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+                      webChromeClient = object : WebChromeClient() {
+                          override fun onPermissionRequest(request: PermissionRequest?) { request?.grant(request.resources) }
+                      }
+                      webViewClient = WebViewClient()
+                      loadUrl("https://discord.com/app")
+                  }
+                  layout.addView(topBar, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+                  layout.addView(discordWeb, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
+                  setContentView(layout)
+              }
+
+              override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+                  super.onActivityResult(requestCode, resultCode, data)
+                  if (requestCode == REQ_CODE && resultCode == Activity.RESULT_OK && data != null) {
+                      val s = Intent(this, RecorderService::class.java).apply { putExtra("CODE", resultCode); putExtra("DATA", data) }
+                      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(s) else startService(s)
+                      Toast.makeText(this, "Grabando! Abre Free Fire", Toast.LENGTH_LONG).show()
+                  }
+              }
+          }
+          EOF_KT1
+          cat << 'EOF_KT2' > app/src/main/java/com/gamer/recorder/RecorderService.kt
+          package com.gamer.recorder
+          import android.app.*
+          import android.content.ContentValues
+          import android.content.Context
+          import android.content.Intent
+          import android.hardware.display.DisplayManager
+          import android.hardware.display.VirtualDisplay
+          import android.media.*
+          import android.media.projection.MediaProjection
+          import android.media.projection.MediaProjectionManager
+          import android.os.*
+          import android.provider.MediaStore
+          import androidx.core.app.NotificationCompat
+          import java.io.File
+          import java.util.concurrent.atomic.AtomicBoolean
+          import kotlin.concurrent.thread
+
+          class RecorderService : Service() {
+              private var projection: MediaProjection? = null
+              private var virtualDisplay: VirtualDisplay? = null
+              private var mediaMuxer: MediaMuxer? = null
+              private var videoEncoder: MediaCodec? = null
+              private var audioEncoder: MediaCodec? = null
+              private val isRecording = AtomicBoolean(false)
+              private var outFile: File? = null
+
+              override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+                  if (intent?.action == "STOP_REC") { isRecording.set(false); stopSelf(); return START_NOT_STICKY }
+                  startNotif()
+                  val code = intent?.getIntExtra("CODE", Activity.RESULT_CANCELED) ?: Activity.RESULT_CANCELED
+                  val data: Intent? = intent?.getParcelableExtra("DATA")
+                  if (code == Activity.RESULT_OK && data != null) {
+                      val mgr = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+                      projection = mgr.getMediaProjection(code, data)
+                      startMixedRecording()
+                  }
+                  return START_STICKY
+              }
+
+              private fun startMixedRecording() {
+                  outFile = File(getExternalFilesDir(Environment.DIRECTORY_MOVIES), "FF_${System.currentTimeMillis()}.mp4")
+                  val vFormat = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, 720, 1280).apply {
+                      setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface)
+                      setInteger(MediaFormat.KEY_BIT_RATE, 6000000)
+                      setInteger(MediaFormat.KEY_FRAME_RATE, 60)
+                      setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1)
+                  }
+                  videoEncoder = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_VIDEO_AVC).apply { configure(vFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE) }
+                  val inputSurface = videoEncoder!!.createInputSurface()
+                  videoEncoder!!.start()
+                  virtualDisplay = projection?.createVirtualDisplay("FFRec", 720, 1280, resources.displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, inputSurface, null, null)
+                  val aFormat = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, 44100, 1).apply {
+                      setInteger(MediaFormat.KEY_AAC_PROFILE, MediaCodecInfo.CodecProfileLevel.AACObjectLC)
+                      setInteger(MediaFormat.KEY_BIT_RATE, 128000)
+                  }
+                  audioEncoder = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_AAC).apply { configure(aFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE); start() }
+                  mediaMuxer = MediaMuxer(outFile!!.absolutePath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+                  isRecording.set(true)
+                  thread { runMuxerLoop(44100) }
+              }
+
+              private fun runMuxerLoop(sampleRate: Int) {
+                  val bufSize = AudioRecord.getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT) * 2
+                  val audioFormat = AudioFormat.Builder().setEncoding(AudioFormat.ENCODING_PCM_16BIT).setSampleRate(sampleRate).setChannelMask(AudioFormat.CHANNEL_IN_MONO).build()
+                  val playbackConfig = AudioPlaybackCaptureConfiguration.Builder(projection!!).addMatchingUsage(AudioAttributes.USAGE_MEDIA).addMatchingUsage(AudioAttributes.USAGE_GAME).addMatchingUsage(AudioAttributes.USAGE_UNKNOWN).build()
+                  val internalRec = AudioRecord.Builder().setAudioFormat(audioFormat).setBufferSizeInBytes(bufSize).setAudioPlaybackCaptureConfig(playbackConfig).build()
+                  val micRec = AudioRecord(MediaRecorder.AudioSource.VOICE_COMMUNICATION, sampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufSize)
+                  internalRec.startRecording(); micRec.startRecording()
+                  val inBuf = ShortArray(1024); val micBuf = ShortArray(1024); val mixBuf = ByteArray(2048)
+                  var vTrack = -1; var aTrack = -1; var muxerStarted = false
+                  val vInfo = MediaCodec.BufferInfo(); val aInfo = MediaCodec.BufferInfo()
+                  val startTimeNs = System.nanoTime()
+                  while (isRecording.get()) {
+                      val r1 = internalRec.read(inBuf, 0, 1024); val r2 = micRec.read(micBuf, 0, 1024)
+                      val samples = maxOf(r1, r2, 0)
+                      if (samples > 0) {
+                          for (i in 0 until samples) {
+                              val s1 = if (i < r1) inBuf[i].toInt() else 0
+                              val s2 = if (i < r2) micBuf[i].toInt() else 0
+                              val mixed = (s1 + s2).coerceIn(Short.MIN_VALUE.toInt(), Short.MAX_VALUE.toInt()).toShort()
+                              mixBuf[i * 2] = (mixed.toInt() and 0xFF).toByte()
+                              mixBuf[i * 2 + 1] = ((mixed.toInt() shr 8) and 0xFF).toByte()
+                          }
+                          val inIdx = audioEncoder!!.dequeueInputBuffer(0)
+                          if (inIdx >= 0) {
+                              val ib = audioEncoder!!.getInputBuffer(inIdx)!!
+                              ib.clear(); ib.put(mixBuf, 0, samples * 2)
+                              audioEncoder!!.queueInputBuffer(inIdx, 0, samples * 2, (System.nanoTime() - startTimeNs) / 1000, 0)
+                          }
+                      }
+                      while (true) {
+                          val outIdx = videoEncoder!!.dequeueOutputBuffer(vInfo, 0)
+                          if (outIdx == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
+                              vTrack = mediaMuxer!!.addTrack(videoEncoder!!.outputFormat)
+                              if (vTrack != -1 && aTrack != -1 && !muxerStarted) { mediaMuxer!!.start(); muxerStarted = true }
+                          } else if (outIdx >= 0) {
+                              val ob = videoEncoder!!.getOutputBuffer(outIdx)!!
+                              if (muxerStarted && vInfo.size > 0) mediaMuxer!!.writeSampleData(vTrack, ob, vInfo)
+                              videoEncoder!!.releaseOutputBuffer(outIdx, false)
+                          } else break
+                      }
+                      while (true) {
+                          val outIdx = audioEncoder!!.dequeueOutputBuffer(aInfo, 0)
+                          if (outIdx == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
+                              aTrack = mediaMuxer!!.addTrack(audioEncoder!!.outputFormat)
+                              if (vTrack != -1 && aTrack != -1 && !muxerStarted) { mediaMuxer!!.start(); muxerStarted = true }
+                          } else if (outIdx >= 0) {
+                              val ob = audioEncoder!!.getOutputBuffer(outIdx)!!
+                              if (muxerStarted && aInfo.size > 0) mediaMuxer!!.writeSampleData(aTrack, ob, aInfo)
+                              audioEncoder!!.releaseOutputBuffer(outIdx, false)
+                          } else break
+                      }
+                  }
+                  try {
+                      internalRec.stop(); internalRec.release(); micRec.stop(); micRec.release()
+                      videoEncoder?.stop(); videoEncoder?.release(); audioEncoder?.stop(); audioEncoder?.release()
+                      if (muxerStarted) mediaMuxer?.stop(); mediaMuxer?.release()
+                      virtualDisplay?.release(); projection?.stop(); saveToGallery()
+                  } catch (e: Exception) { e.printStackTrace() }
+              }
+
+              private fun saveToGallery() {
+                  val file = outFile ?: return
+                  val values = ContentValues().apply {
+                      put(MediaStore.Video.Media.DISPLAY_NAME, file.name)
+                      put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+                      put(MediaStore.Video.Media.RELATIVE_PATH, Environment.DIRECTORY_MOVIES)
+                  }
+                  val uri = contentResolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
+                  if (uri != null) { contentResolver.openOutputStream(uri)?.use { out -> file.inputStream().use { it.copyTo(out) } }; file.delete() }
+              }
+
+              private fun startNotif() {
+                  val chId = "RecGamerChannel"
+                  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                      val ch = NotificationChannel(chId, "Grabador Free Fire", NotificationManager.IMPORTANCE_LOW)
+                      getSystemService(NotificationManager::class.java).createNotificationChannel(ch)
+                  }
+                  val stopIntent = Intent(this, RecorderService::class.java).apply { action = "STOP_REC" }
+                  val pi = PendingIntent.getService(this, 0, stopIntent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+                  val notif = NotificationCompat.Builder(this, chId).setContentTitle("Grabando Free Fire + Discord + Voz").setContentText("Toca Detener cuando termines").setSmallIcon(android.R.drawable.presence_video_online).addAction(android.R.drawable.ic_media_pause, "Detener", pi).setOngoing(true).build()
+                  startForeground(1, notif)
+              }
+
+              override fun onBind(intent: Intent?): IBinder? = null
+          }
+          EOF_KT2
+          gradle assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: APK-GamerRec-Discord
+          path: app/build/outputs/apk/debug/app-debug.apk
